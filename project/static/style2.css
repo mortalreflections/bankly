@@ -1,0 +1,41 @@
+body {
+    background-color: white
+}
+
+.notes {
+    border-top-right-radius: 42px
+}
+
+.dot {
+    height: 6px;
+    width: 6px;
+    margin-left: 8px;
+    margin-right: 3px;
+    margin-top: 2px;
+    background-color: rgb(91, 92, 91);
+    border-radius: 50%;
+    display: inline-block
+}
+
+.review-text {
+    background: #e3e1eb
+}
+
+.info {
+    color: #8c8b9a
+}
+
+}
+.dot-red {
+    background-color: red !important;
+    height: 6px;
+    width: 6px;
+    margin-left: 8px;
+    margin-right: 3px;
+    margin-top: 2px;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.overview {
+    color: red

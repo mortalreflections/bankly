@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">FIXED DEPOSITS</h3>
+    <div class="box">
+
+        <form action="" method="POST">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-normal" type="text" name="name" placeholder="Name" autofocus="">
+                </div>
+            </div>
+
+           <div class="field">
+               <div class="control">
+                    <input class="input is-normal" type="number" name="age" placeholder="Age" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-normal" type="email" name="email" placeholder="Email ">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-normal" type="date" name="DOB" placeholder="Date Of Birth">
+                </div>
+            </div>
+<!--            <div class="field">-->
+<!--                <div class="control">-->
+<!--                    <input class="input is-normal" type="number" name="fdnumber" placeholder="FD Number">-->
+<!--                </div>-->
+<!--            </div>-->
+             <div class="field">
+                <div class="control">
+                    <input class="input is-normal" type="text" name="bank" placeholder="Bank Name">
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-normal" type="text" name="amount" min="1" step="any" placeholder="Invested Amount">
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-normal" type="text" name="interest" min="1" step= "any"  placeholder="Interest">
+                </div>
+            </div>
+
+        `<div class="field">
+                <div class="control">
+                    <input class="input is-normal" type="text" name="maturity" min="1" step= "any"  placeholder="Maturity amount">
+                </div>
+            </div>
+
+            <button class="button is-link is-rounded">Add</button>
+        </form>
+    </div>
+</div>
+{% endblock %}</title>
+</head>
+<body>
+
+</body>
+</html>

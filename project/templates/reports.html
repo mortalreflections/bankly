@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bankly</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+</head>
+
+<body>
+{% block content %}
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+
+                        <div class="navbar-end">
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main.reports') }}" class="navbar-item">
+                                Export
+                            </a>
+
+                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                                Logout
+                            </a>
+                            {% endif %}
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 style="color: black; font-size: 25px; font-weight: 900;font-style: oblique;"> Fixed Deposits </h1>
+
+
+                 <table class="table table-hover table-dark">
+
+
+
+
+                    <tr>
+
+
+                        <th>FDNO</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>DOB</th>
+                        <th>Bank</th>
+                        <th>Amount(Rupees)</th>
+                        <th>Interest(Rupees)</th>
+                        <th>Maturity(Rupees)</th>
+
+                    </tr>
+
+
+                    {% for row in outputs %}
+                    <tr>
+                        <td>{{row.FD_Number}}</td>
+                        <td>{{row.Name}}</td>
+                        <td>{{row.Email}}</td>
+                        <td>{{row.Age}}</td>
+                        <td>{{row.DOB}}</td>
+                        <td>{{row.BankName}}</td>
+                        <td>{{row.Amount_Rupees}}</td>
+                        <td>{{row.Interest_Rupees}}</td>
+                        <td>{{row.Maturity_Rupees}}</td>
+
+                        <td>
+<!--                            <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>-->
+                            <a href="/delete/{{row.FD_Number}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+
+
+                        </td>
+
+
+                    </tr>
+                     {% endfor %}
+                 </table>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+</body>
+
+</html>
+

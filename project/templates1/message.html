@@ -1,0 +1,12 @@
+
+{% extends "base1.html" %}
+{% block content %}
+	 {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <a href="{{url_for('login')}}" class="text-white-50 fw-bold">{{message}}</a></p>
+          {% endfor %}  
+        {% endif %}
+      {% endwith %}  
+
+{% endblock %}
