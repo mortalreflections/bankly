@@ -6,9 +6,9 @@ from flask_login import login_required, current_user
 
 from .models import Users, Deposits
 from . import db
-main = Blueprint('main', __name__)
 from datetime import datetime as dt
 
+main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
@@ -20,6 +20,7 @@ def redirecting():
     return render_template("admin.html")
 
 
+
 @main.route('/profile')
 @login_required
 def profile():
@@ -29,11 +30,7 @@ def profile():
 @login_required
 def deposits():
     return render_template('deposits.html')
-<<<<<<< HEAD
-=======
 
-
->>>>>>> f729efd13cf816d814d23b15d85a8f8ed6a07417
 
 @main.route("/deposits", methods=["POST"])
 @login_required
