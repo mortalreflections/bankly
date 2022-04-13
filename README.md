@@ -34,4 +34,7 @@ set FLASK_APP=main.py
 
 flask run
 
+admin credentials
 =======================================
+username - admin@bankly.com
+password - 12345
