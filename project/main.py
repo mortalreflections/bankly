@@ -25,6 +25,11 @@ def redirecting():
 def profile():
     return render_template('profile.html', name=current_user.Name)
 
+@main.route('/deposits')
+@login_required
+def deposits():
+    return render_template('deposits.html')
+
 
 
 @main.route("/deposits", methods=["POST"])
