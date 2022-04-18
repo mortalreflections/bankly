@@ -1,7 +1,7 @@
 from flask import Flask 
 from flask_sqlalchemy import SQLAlchemy 
 from flask_login import LoginManager
-import os
+import os,sys
 from flask_migrate import Migrate
 
 db = SQLAlchemy()
@@ -13,6 +13,9 @@ def create_app():
     base_dir = os.path.abspath(os.path.dirname(__file__))
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_dir, "bankly.sqlite")
     # app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(os.path.dirname(SCRIPT_DIR))
 
     db.init_app(app)
     migrate=Migrate(app,db)
@@ -22,7 +25,7 @@ def create_app():
 
 
 
-    from .models import Users, Deposits
+    from project.models import Users, Deposits
 
     @login_manager.user_loader
     def load_user(user_id):
