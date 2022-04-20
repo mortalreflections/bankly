@@ -1,13 +1,15 @@
-
+import numpy as np
 import pandas as pd, sqlite3,csv
+import matplotlib.pyplot as plt
 from flask import Blueprint, render_template, request, flash, redirect, url_for, send_file
 from flask_login import login_required, current_user
-
-
+from sqlalchemy import func, create_engine
 from .models import Users, Deposits
 from . import db
-main = Blueprint('main', __name__)
 from datetime import datetime as dt
+
+main = Blueprint('main', __name__)
+
 
 
 @main.route('/')
@@ -15,9 +17,11 @@ def index():
     return render_template('index.html')
 
 
+
 @main.route("/redirect")
 def redirecting():
     return render_template("admin.html")
+
 
 
 @main.route('/profile')
@@ -25,15 +29,12 @@ def redirecting():
 def profile():
     return render_template('profile.html', name=current_user.Name)
 
+
 @main.route('/deposits')
 @login_required
 def deposits():
     return render_template('deposits.html')
-<<<<<<< HEAD
-=======
 
-
->>>>>>> f729efd13cf816d814d23b15d85a8f8ed6a07417
 
 @main.route("/deposits", methods=["POST"])
 @login_required
@@ -83,12 +84,77 @@ def reports():
         deposit_data["Maturity_Rupees"] = deposit.Maturity
         output.append(deposit_data)
 
-    df1 = pd.DataFrame(output)
-    df1.to_csv("adminreports.csv", index=False)
-
 
     return render_template("reports.html",outputs=output)
 
+@main.route("/exports")
+@login_required
+def exports():
+    deposits = Deposits.query.all()
+    output = []
+    count = 0
+    for deposit in deposits:
+        deposit_data = {}
+        deposit_data["FD_Number"] = deposit.id
+        deposit_data["Name"] = deposit.Name
+        deposit_data["Email"] = deposit.Email
+        deposit_data["Age"] = deposit.Age
+        deposit_data["DOB"] = deposit.DOB
+        deposit_data["BankName"] = deposit.BankName
+        deposit_data["Amount_Rupees"] = deposit.Amount
+        deposit_data["Interest_Rupees"] = deposit.Interest
+        deposit_data["Maturity_Rupees"] = deposit.Maturity
+        output.append(deposit_data)
+        count += 1
+
+    df1 = pd.DataFrame(output)
+    df1.to_csv("csvreports/adminreports.csv", index=False)
+
+    plt.style.use('bmh')
+    my_conn = create_engine("sqlite:///project\\bankly.sqlite")
+    query = "SELECT  COUNT(id) as id , Email, Name FROM Deposits GROUP BY Email;"
+    df = pd.read_sql(query, my_conn)
+    x = df['Name']
+    y = df["id"]
+    plt.ylim(0, count)
+    plt.yticks(np.arange(0, count + 4, 1.0))
+    plt.xlabel('Name', fontsize=18)
+    plt.title("Fixed Deposits of Users")
+    plt.ylabel('Number of Fixed Deposits', fontsize=18)
+    plt.bar(x, y)
+    plt.show()
+    return render_template("reports.html", outputs=output)
+
+
+
+@main.route("/update/<int:FD_Number>" , methods=["GET", "POST"])
+@login_required
+def update(FD_Number):
+    if request.method=="GET":
+        deposit = Deposits.query.filter_by(id=FD_Number).first()
+        output=[]
+        deposit_data = {}
+        deposit_data["FD_Number"] = deposit.id
+        deposit_data["Name"] = deposit.Name
+        deposit_data["Email"] = deposit.Email
+        deposit_data["Age"] = deposit.Age
+        deposit_data["DOB"] = deposit.DOB
+        deposit_data["BankName"] = deposit.BankName
+        output.append(deposit_data)
+        return render_template("update.html", outputs=output)
+
+    else:
+        deposit = Deposits.query.filter_by(id=FD_Number).first()
+        amount = request.form.get("amount")
+        interest = request.form.get("interest")
+        maturity = request.form.get("maturity")
+
+        deposit.Amount = amount
+        deposit.Interest = interest
+        deposit.Maturity = maturity
+        db.session.commit()
+
+        return redirect(url_for('main.reports'))
 
 
 @main.route("/delete/<int:FD_Number>")
@@ -122,7 +188,7 @@ def mydeposits():
             output.append(deposit_data)
 
             df2 = pd.DataFrame(output)
-            df2.to_csv("mydeposits.csv", index=False)
+            df2.to_csv("csvreports/mydeposits.csv", index=False)
             return render_template("mydeposits.html", outputs=output)
 
     else:
@@ -131,6 +197,8 @@ def mydeposits():
 
 
     return redirect(url_for('main.mydeposits'))
+
+
 
 
 
