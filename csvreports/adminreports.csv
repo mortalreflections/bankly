@@ -1,5 +1,5 @@
 FD_Number,Name,Email,Age,DOB,BankName,Amount_Rupees,Interest_Rupees,Maturity_Rupees
-6,dinesh,dineshkumar@gmail.com,24,2022-04-06,sbi,12000.00,123.00,12.00
-7,srinivasan,sivamsrini214@gmail.com,24,2022-04-08,SBI,120.00,1205.00,25000.00
-8,srinivasan,sivamsrini214@gmail.com,24,2022-04-08,SBI,120.00,1205.00,25000.00
-9,Cheenu,cheenu@gmail.com,24,2022-03-31,SBI,123.00,1234.00,12345.00
+6,dinesh,dineshkumar@gmail.com,24,2022-04-06,sbi,10000.00,1000.00,11000.00
+7,srinivasan,sivamsrini214@gmail.com,24,2022-04-08,SBI,15000.00,2000.00,17000.00
+8,srinivasan,sivamsrini214@gmail.com,24,2022-04-08,SBI,200000.00,20000.00,220000.00
+9,Cheenu,cheenu@gmail.com,24,2022-03-31,SBI,1000000.00,100000.00,1100000.00
