@@ -9,9 +9,6 @@ from . import db
 from datetime import datetime as dt
 
 main = Blueprint('main', __name__)
-
-
-
 @main.route('/')
 def index():
     return render_template('index.html')

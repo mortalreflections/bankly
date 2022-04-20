@@ -30,7 +30,8 @@ env\scripts\activate
 
 set FLASK_ENV=development
 
-set FLASK_APP=main.py
+app.py is the flask application to run in terminal
+set FLASK_APP=app.py
 
 flask run
 

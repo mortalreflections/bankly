@@ -14,6 +14,9 @@ def create_app():
     base_dir = os.path.abspath(os.path.dirname(__file__))
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_dir, "bankly.sqlite")
     # app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(os.path.dirname(SCRIPT_DIR))
 
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     sys.path.append(os.path.dirname(SCRIPT_DIR))
